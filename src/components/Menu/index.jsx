@@ -3,15 +3,15 @@ import { FirstContext } from '../../layout';
 import style from './menu.module.css';
 
 export const Menu = () => {
-  // const j = 'abba';
-  // const s = 'bbc';
+  const j = 'abba';
+  const s = 'bbc';
 
-  // console.log(8
-  //   s
-  //     .split('')
-  //     .filter((char) => j.includes(char))
-  //     .join(''),
-  // );
+  console.log(
+    s
+      .split('')
+      .filter((char) => j.includes(char))
+      .join(''),
+  );
 
   const { state, inc } = useContext(FirstContext);
   return (
