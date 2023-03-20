@@ -4,7 +4,7 @@ import { Menu } from '../../components/Menu';
 import { useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import styles from './main.module.css';
-console.log(1);
+
 const TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEwN2UwOGFhMzk3MTIxODM4ZjI4ZDYiLCJncm91cCI6Imdyb3VwLTExIiwiaWF0IjoxNjc4ODAyNDQ2LCJleHAiOjE3MTAzMzg0NDZ9.v2N78pPT2PW-quidPM16_bB_y59EKagCnnN6wHRDvB8';
 

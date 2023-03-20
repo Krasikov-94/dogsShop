@@ -1,5 +1,5 @@
 import style from './carditem.module.css';
-console.log(1);
+
 export const CardItem = ({ prod }) => {
   const totalPrice = prod.discount ? prod.price - (prod.price * prod.discount) / 100 : prod.price;
 
