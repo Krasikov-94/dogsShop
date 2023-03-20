@@ -1,0 +1,54 @@
+.header {
+  /* background-color: #d8ecf6; */
+  background-color: #6f62a5;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  height: 150px;
+}
+.logoName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  height: 50px;
+  margin-right: 10px;
+}
+.heart {
+  height: 30px;
+  margin-right: 40px;
+}
+.heart:hover {
+  opacity: 0.4;
+  cursor: pointer;
+}
+.shop {
+  height: 30px;
+  margin-right: 40px;
+}
+.shop:hover {
+  opacity: 0.4;
+  cursor: pointer;
+}
+.dog {
+  height: 30px;
+}
+.dog:hover {
+  opacity: 0.4;
+  cursor: pointer;
+}
+.input {
+  border: 2px solid #1e2342;
+  border-radius: 20px;
+  width: 30vw;
+  height: 40px;
+  text-align: center;
+  font-size: 20px;
+}
+.input::placeholder {
+  margin-right: 12px;
+  background: url(/src/assets/img/magnifying-glass-solid.svg) no-repeat right;
+  opacity: 0.5;
+}

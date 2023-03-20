@@ -1,0 +1,11 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 30px;
+  justify-content: center;
+  align-items: center;
+  place-self: center;
+  /* background-color: #2a2d48; */
+  /* background-color: #7486a2; */
+  background-color: #4f4d6e;
+}
