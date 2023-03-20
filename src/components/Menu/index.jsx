@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { FirstContext } from '../../layout';
 import style from './menu.module.css';
-
+console.log(1);
 export const Menu = () => {
   // const j = 'abba';
   // const s = 'bbc';
 
-  // console.log(8
+  // console.log(
   //   s
   //     .split('')
   //     .filter((char) => j.includes(char))

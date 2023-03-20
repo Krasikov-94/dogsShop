@@ -15,6 +15,7 @@ export const Header = () => {
     console.log(inp);
   };
 
+  console.log(1);
   return (
     <div className={style.header}>
       <div className={style.logoName}>

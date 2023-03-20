@@ -17,7 +17,7 @@ export const Layout = () => {
     setState,
     inc,
   };
-
+  console.log(1);
   return (
     <>
       <Header />
