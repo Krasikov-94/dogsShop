@@ -2,3 +2,25 @@
   background-color: #40414c;
   background: linear-gradient(#6f62a5, #4f4d6e);
 }
+.ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.li {
+  list-style-type: none;
+  margin: 10px;
+}
+.btn {
+  background: white;
+  color: black;
+  font-size: 20px;
+  border-radius: 20px;
+  padding: 10px;
+}
+.btn:active {
+  background: #4f4d6e;
+}
+.btn:hover {
+  background: #4f4d6e;
+}
