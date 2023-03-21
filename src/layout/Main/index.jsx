@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { CardList } from '../../components/CardList';
 import { Menu } from '../../components/Menu';
 import { useEffect, useState } from 'react';
@@ -25,14 +25,33 @@ export const Main = () => {
     fetchData();
   }, []);
 
-  const saleSort = useMemo(() => {
-    setProd(prod.sort((a, b) => b.discount - a.discount));
-    console.log(prod);
-  }, []);
+  const saleSort = () => {
+    setProd([...prod.sort((a, b) => b.discount - a.discount)]);
+  };
 
+  const popularSort = () => {
+    setProd([...prod.sort((a, b) => b.likes.length - a.likes.length)]);
+  };
+
+  const minPrice = () => {};
+
+  const maxPrice = () => {
+    setProd([...prod.sort((a, b) => b.price - a.price)]);
+  };
+
+  const ratSort = () => {
+    setProd([...prod.sort((a, b) => b.avgRating - a.avgRating)]);
+  };
+  console.log(prod);
   return (
     <div className={styles}>
-      <Menu saleSort={saleSort} />
+      <Menu
+        saleSort={saleSort}
+        popularSort={popularSort}
+        minPrice={minPrice}
+        maxPrice={maxPrice}
+        ratSort={ratSort}
+      />
       <CardList prod={prod} />
     </div>
   );

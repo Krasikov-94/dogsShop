@@ -165,6 +165,15 @@
   background-color: #756abd;
   color: white;
 }
+.rat {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  color: tan;
+  font-size: 24px;
+  font-weight: 700;
+}
 
 /* .img {
   width: 200px;

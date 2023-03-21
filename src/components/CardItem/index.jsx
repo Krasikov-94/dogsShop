@@ -1,7 +1,15 @@
+// import { useState, useEffect, useCallback } from 'react';
 import style from './carditem.module.css';
 
-export const CardItem = ({ prod }) => {
+export const CardItem = ({ prod, pop }) => {
   const totalPrice = prod.discount ? prod.price - (prod.price * prod.discount) / 100 : prod.price;
+  // console.log(prod);
+  // console.log(pop);
+  const ratSum = pop.reduce((acc, cur) => acc + cur, 0);
+  const ratLength = pop.length;
+  const rat = Math.round(ratSum / ratLength);
+  pop = rat ? rat : 0;
+  prod.avgRating = rat ? rat : 0;
 
   return (
     <>
@@ -9,6 +17,7 @@ export const CardItem = ({ prod }) => {
         {prod.discount > 0 && <div className={style.badge}>{prod.discount}%</div>}
         <div className={style.product_tumb}>
           <img src={prod.pictures} alt="" />
+          <div className={style.rat}>{rat > 0 ? rat : ''}</div>
         </div>
         <div className={style.product_details}>
           <span className={style.product_catagory}>{prod.wight}</span>
