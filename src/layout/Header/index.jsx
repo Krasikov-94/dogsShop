@@ -6,7 +6,7 @@ import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import style from './header.module.css';
 
-export const Header = () => {
+const Header = () => {
   const [inp, setInp] = useState('');
 
   const handleSubmit = (e) => {
@@ -47,3 +47,5 @@ export const Header = () => {
     </div>
   );
 };
+
+export const MemoHeader = React.memo(Header);

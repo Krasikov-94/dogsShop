@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import style from './menu.module.css';
 
 export const Menu = ({ saleSort, popularSort, minPrice, maxPrice, ratSort }) => {

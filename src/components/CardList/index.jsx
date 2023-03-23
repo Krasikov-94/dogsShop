@@ -2,6 +2,7 @@ import { CardItem } from '../CardItem';
 import style from './cardlist.module.css';
 
 export const CardList = ({ prod }) => {
+  //выводим карточки из полученных данных
   return (
     <div className={style.wrapper}>
       {prod.map((el) => {

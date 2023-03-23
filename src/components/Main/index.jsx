@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardList } from '../../components/CardList';
-import { Menu } from '../../components/Menu';
+import { CardList } from '../CardList';
+import { Menu } from '../Menu';
 import { useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import styles from './main.module.css';
@@ -11,6 +11,7 @@ const TOKEN =
 export const Main = () => {
   const [prod, setProd] = useState([]);
 
+  //делаем запрос и получаем весь список товаров и упаковываем в prod
   const fetchData = useCallback(async () => {
     const res = await fetch('https://api.react-learning.ru/products', {
       headers: {
@@ -25,24 +26,47 @@ export const Main = () => {
     fetchData();
   }, []);
 
+  //сортировка по скидке
   const saleSort = () => {
     setProd([...prod.sort((a, b) => b.discount - a.discount)]);
   };
 
+  //сортировка по самым популярным
   const popularSort = () => {
     setProd([...prod.sort((a, b) => b.likes.length - a.likes.length)]);
   };
 
-  const minPrice = () => {};
-
-  const maxPrice = () => {
-    setProd([...prod.sort((a, b) => b.price - a.price)]);
+  //сортировка по минимальной цене
+  const minPrice = () => {
+    setProd([
+      ...prod.sort(
+        (a, b) =>
+          (a.discount ? a.price - (a.price * a.discount) / 100 : a.price) -
+          (b.discount ? b.price - (b.price * b.discount) / 100 : b.price),
+      ),
+    ]);
   };
 
+  //сортировка по максимальной цене
+  const maxPrice = () => {
+    setProd([
+      ...prod.sort(
+        (a, b) =>
+          (b.discount ? b.price - (b.price * b.discount) / 100 : b.price) -
+          (a.discount ? a.price - (a.price * a.discount) / 100 : a.price),
+      ),
+    ]);
+  };
+
+  //сортировка по среднему рейтингу
   const ratSort = () => {
     setProd([...prod.sort((a, b) => b.avgRating - a.avgRating)]);
   };
+
   console.log(prod);
+
+  //отправляем сортировку в меню, где расположены все кнопки
+  //а список товаров в лист
   return (
     <div className={styles}>
       <Menu
