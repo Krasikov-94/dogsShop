@@ -5,6 +5,7 @@ import { faDog } from '@fortawesome/free-solid-svg-icons';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import style from './header.module.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [inp, setInp] = useState('');
@@ -30,19 +31,30 @@ const Header = () => {
           onChange={(event) => setInp(event.target.value)}
         />
       </form>
-
       <div className={style.heartShopDog}>
-        <FontAwesomeIcon
-          icon={faHeart}
-          className={style.heart}
-          onClick={() => console.log('HEART')}
-        />
-        <FontAwesomeIcon
-          icon={faBagShopping}
-          className={style.shop}
-          onClick={() => console.log('SORT')}
-        />
-        <FontAwesomeIcon icon={faDog} className={style.dog} onClick={() => console.log('DOG')} />
+        <nav>
+          <Link to="/favorites">
+            <FontAwesomeIcon
+              icon={faHeart}
+              className={style.heart}
+              onClick={() => console.log('HEART')}
+            />
+          </Link>
+          <Link to="/sort">
+            <FontAwesomeIcon
+              icon={faBagShopping}
+              className={style.shop}
+              onClick={() => console.log('SORT')}
+            />
+          </Link>
+          <Link to="/prod">
+            <FontAwesomeIcon
+              icon={faDog}
+              className={style.dog}
+              onClick={() => console.log('DOG')}
+            />
+          </Link>
+        </nav>
       </div>
     </div>
   );
