@@ -1,25 +1,37 @@
-import React from 'react';
-import { CardList } from '../CardList';
-import { Menu } from '../Menu';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { TOKEN } from '../../../utils/constants';
+import { CardList } from '../../Card/CardList';
+import { Menu } from '../../Menu';
 import { useCallback } from 'react';
-import styles from './main.module.css';
+import styles from './products.module.css';
+import { token } from '../../../utils/constants';
 
-const TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEwN2UwOGFhMzk3MTIxODM4ZjI4ZDYiLCJncm91cCI6Imdyb3VwLTExIiwiaWF0IjoxNjc4ODAyNDQ2LCJleHAiOjE3MTAzMzg0NDZ9.v2N78pPT2PW-quidPM16_bB_y59EKagCnnN6wHRDvB8';
+export const Products = () => {
+  const navigate = useNavigate();
 
-export const Main = () => {
+  useEffect(() => {
+    const token = localStorage.getItem(TOKEN);
+    if (!token) navigate('/signin');
+  }, [navigate]);
+
   const [prod, setProd] = useState([]);
+  const [res, setRes] = useState(true);
 
   //делаем запрос и получаем весь список товаров и упаковываем в prod
   const fetchData = useCallback(async () => {
     const res = await fetch('https://api.react-learning.ru/products', {
       headers: {
-        Authorization: 'Bearer ' + TOKEN,
+        Authorization: 'Bearer ' + token,
       },
     });
-    const responce = await res.json();
-    setProd(responce.products);
+    setRes(res.ok);
+    if (res.ok) {
+      const responce = await res.json();
+      setProd(responce.products);
+    } else {
+      return <p>dsdasdasdasdasd</p>;
+    }
   }, []);
 
   useEffect(() => {
@@ -63,12 +75,12 @@ export const Main = () => {
     setProd([...prod.sort((a, b) => b.avgRating - a.avgRating)]);
   };
 
-  console.log(prod);
+  // console.log(prod);
 
   //отправляем сортировку в меню, где расположены все кнопки
   //а список товаров в лист
   return (
-    <div className={styles}>
+    <div className={styles.body}>
       <Menu
         saleSort={saleSort}
         popularSort={popularSort}

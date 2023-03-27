@@ -5,9 +5,9 @@ import App from './App';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Layout } from './layout';
 import { ErrorPage } from './components/ErrorPage';
-import { StartPage } from './components/StartPage';
-import { Sort } from './components/Sort';
-import { Favorites } from './components/Favorites';
+import { Home } from './components/Pages/Home';
+import { Sign } from './components/Pages/Sign';
+import { SignUp } from './components/Pages/Sign/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -16,22 +16,22 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'prod',
+        path: 'home',
+        element: <Home />,
+      },
+      {
+        path: 'products',
         element: <App />,
-      },
-      {
-        path: 'sort',
-        element: <Sort />,
-      },
-      {
-        path: 'favorites',
-        element: <Favorites />,
       },
     ],
   },
   {
-    path: '/start',
-    element: <StartPage />,
+    path: 'signin',
+    element: <Sign />,
+  },
+  {
+    path: 'signup',
+    element: <SignUp />,
   },
 ]);
 

@@ -54,7 +54,9 @@ const Footer = () => {
             <p>trololo@gmail.com</p>
           </li>
           <li>
-            <a href="#1">LOGO</a>
+            <a href="#1" onClick={() => localStorage.clear()}>
+              LOGO
+            </a>
           </li>
         </ul>
       </div>

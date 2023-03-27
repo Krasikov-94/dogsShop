@@ -5,7 +5,7 @@ import { faDog } from '@fortawesome/free-solid-svg-icons';
 import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import style from './header.module.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
   const [inp, setInp] = useState('');
@@ -19,7 +19,11 @@ const Header = () => {
   return (
     <div className={style.header}>
       <div className={style.logoName}>
-        <FontAwesomeIcon icon={faPaw} className={style.logo} />
+        <nav>
+          <NavLink to={'/products'} className={({ isActive }) => (isActive ? style.active : '')}>
+            <FontAwesomeIcon icon={faPaw} className={style.logo} />
+          </NavLink>
+        </nav>
         <h1>DogFood</h1>
       </div>
       <form onSubmit={handleSubmit}>
@@ -33,27 +37,27 @@ const Header = () => {
       </form>
       <div className={style.heartShopDog}>
         <nav>
-          <Link to="/favorites">
+          <NavLink to="/favorites" className={({ isActive }) => (isActive ? style.active : '')}>
             <FontAwesomeIcon
               icon={faHeart}
               className={style.heart}
               onClick={() => console.log('HEART')}
             />
-          </Link>
-          <Link to="/sort">
+          </NavLink>
+          <NavLink to="/sort" className={({ isActive }) => (isActive ? style.active : '')}>
             <FontAwesomeIcon
               icon={faBagShopping}
               className={style.shop}
               onClick={() => console.log('SORT')}
             />
-          </Link>
-          <Link to="/prod">
+          </NavLink>
+          <NavLink to="/" className={({ isActive }) => (isActive ? style.active : '')}>
             <FontAwesomeIcon
               icon={faDog}
               className={style.dog}
               onClick={() => console.log('DOG')}
             />
-          </Link>
+          </NavLink>
         </nav>
       </div>
     </div>
