@@ -15,8 +15,7 @@ export const signInFetch = async (values) => {
   console.log(response.data);
   return response;
 };
-
-export const useSignInUser = () => {
+export const useSignInUser = (values) => {
   const {
     data: user,
     isError,
@@ -24,7 +23,7 @@ export const useSignInUser = () => {
     isLoading,
   } = useQuery({
     queryKey: ['user'],
-    queryFn: signInFetch,
+    queryFn: signInFetch(values),
   });
   return { user, isError, error, isLoading };
 };

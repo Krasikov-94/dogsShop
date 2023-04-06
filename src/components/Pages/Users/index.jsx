@@ -1,3 +1,4 @@
+import { useMutation, useQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
 // import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -21,8 +22,8 @@ export const Users = () => {
     navigate('/signin');
   };
 
-  const { user, isError, error, isLoading } = useSignInUser();
-  console.log(user);
+  const mutation = useMutation(['users']);
+  console.log(mutation);
 
   return (
     <>
