@@ -1,94 +1,140 @@
-import React, { useEffect, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useProducts } from '../../../hooks/useAllProducts';
 import { TOKEN } from '../../../utils/constants';
 import { CardList } from '../../Card/CardList';
 import { Menu } from '../../Menu';
-import { useCallback } from 'react';
 import styles from './products.module.css';
-import { token } from '../../../utils/constants';
 
 export const Products = () => {
   const navigate = useNavigate();
 
+  const token = localStorage.getItem(TOKEN);
   useEffect(() => {
-    const token = localStorage.getItem(TOKEN);
     if (!token) navigate('/signin');
-  }, [navigate]);
+  }, [navigate, token]);
 
-  const [prod, setProd] = useState([]);
-  const [res, setRes] = useState(true);
-
-  //делаем запрос и получаем весь список товаров и упаковываем в prod
-  const fetchData = useCallback(async () => {
-    const res = await fetch('https://api.react-learning.ru/products', {
-      headers: {
-        Authorization: 'Bearer ' + token,
-      },
-    });
-    setRes(res.ok);
-    if (res.ok) {
-      const responce = await res.json();
-      setProd(responce.products);
-    } else {
-      return <p>dsdasdasdasdasd</p>;
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // const [prod, setProd] = useState([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch('https://api.react-learning.ru/products', {
+  //       headers: {
+  //         Authorization: 'Bearer ' + token,
+  //       },
+  //     });
+  //     if (res.ok) {
+  //       const responce = await res.json();
+  //       setProd(responce.products);
+  //     } else {
+  //       return <p>dsdasdasdasdasd</p>;
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   //сортировка по скидке
   const saleSort = () => {
-    setProd([...prod.sort((a, b) => b.discount - a.discount)]);
+    // products = [...products.sort((a, b) => b.discount - a.discount)];
+    products.sort((a, b) => b.discount - a.discount);
+    return products;
   };
-
   //сортировка по самым популярным
   const popularSort = () => {
-    setProd([...prod.sort((a, b) => b.likes.length - a.likes.length)]);
+    products.sort((a, b) => b.likes.length - a.likes.length);
+    return products;
   };
-
   //сортировка по минимальной цене
   const minPrice = () => {
-    setProd([
-      ...prod.sort(
-        (a, b) =>
-          (a.discount ? a.price - (a.price * a.discount) / 100 : a.price) -
-          (b.discount ? b.price - (b.price * b.discount) / 100 : b.price),
-      ),
-    ]);
+    products.sort(
+      (a, b) =>
+        (a.discount ? a.price - (a.price * a.discount) / 100 : a.price) -
+        (b.discount ? b.price - (b.price * b.discount) / 100 : b.price),
+    );
+    return products;
   };
-
   //сортировка по максимальной цене
   const maxPrice = () => {
-    setProd([
-      ...prod.sort(
-        (a, b) =>
-          (b.discount ? b.price - (b.price * b.discount) / 100 : b.price) -
-          (a.discount ? a.price - (a.price * a.discount) / 100 : a.price),
-      ),
-    ]);
+    products.sort(
+      (a, b) =>
+        (b.discount ? b.price - (b.price * b.discount) / 100 : b.price) -
+        (a.discount ? a.price - (a.price * a.discount) / 100 : a.price),
+    );
+    return products;
   };
-
   //сортировка по среднему рейтингу
   const ratSort = () => {
-    setProd([...prod.sort((a, b) => b.avgRating - a.avgRating)]);
+    products.sort((a, b) => b.avgRating - a.avgRating);
+    return products;
   };
 
-  // console.log(prod);
+  const client = useQueryClient();
+  // делаем запрос и получаем весь список товаров и упаковываем в products
 
-  //отправляем сортировку в меню, где расположены все кнопки
-  //а список товаров в лист
+  // const {
+  //   data: prod,
+  //   isError,
+  //   error,
+  //   isLoading,
+  //   refetch,
+  // } = useQuery({
+  //   queryKey: ['products'],
+  //   queryFn: allProd,
+  // });
+
+  const { prod, isError, error, isLoading } = useProducts();
+  console.log(prod, isError, error, isLoading);
+
+  const { mutateAsync: saleM } = useMutation({
+    mutationFn: saleSort,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['saleSort'] });
+    },
+  });
+  const { mutateAsync: popularM } = useMutation({
+    mutationFn: popularSort,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['popularSort'] });
+    },
+  });
+  const { mutateAsync: minM } = useMutation({
+    mutationFn: minPrice,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['minPrice'] });
+    },
+  });
+  const { mutateAsync: maxM } = useMutation({
+    mutationFn: maxPrice,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['maxPrice'] });
+    },
+  });
+  const { mutateAsync: ratM } = useMutation({
+    mutationFn: ratSort,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['ratSort'] });
+    },
+  });
+
+  if (isError) return <p>Произошла ошибка: {error}</p>;
+
+  if (isLoading) return <p>Загрузка...</p>;
+
+  const products = prod.products;
+
+  //отправляем сортировку в Menu, где расположены все кнопки
+  //а список товаров в CardList
   return (
     <div className={styles.body}>
       <Menu
-        saleSort={saleSort}
-        popularSort={popularSort}
-        minPrice={minPrice}
-        maxPrice={maxPrice}
-        ratSort={ratSort}
+        saleM={saleM}
+        products={products}
+        popularM={popularM}
+        minM={minM}
+        maxM={maxM}
+        ratM={ratM}
       />
-      <CardList prod={prod} />
+      <CardList products={products} />
     </div>
   );
 };

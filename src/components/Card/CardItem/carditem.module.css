@@ -162,7 +162,7 @@
   transition: box-shadow 200ms linear;
 }
 .btn:hover {
-  background-color: #756abd;
+  background-color: #f0eeff;
   color: white;
 }
 .rat {
@@ -170,12 +170,9 @@
   top: 0;
   right: 0;
   margin: 10px;
-  color: #1abaab;
+  color: #fbb516;
   font-size: 24px;
   font-weight: 700;
-}
-.svg {
-  fill: #fbb516;
 }
 
 /* .img {

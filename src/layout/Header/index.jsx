@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
-import { faDog } from '@fortawesome/free-solid-svg-icons';
-import { faBagShopping } from '@fortawesome/free-solid-svg-icons';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import style from './header.module.css';
 import { NavLink } from 'react-router-dom';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { SiDatadog } from 'react-icons/si';
+import { BsFillChatSquareHeartFill } from 'react-icons/bs';
+import { FaShoppingBasket } from 'react-icons/fa';
 
 const Header = () => {
   const [inp, setInp] = useState('');
@@ -14,6 +15,13 @@ const Header = () => {
     e.preventDefault();
     setInp(inp);
     console.log(inp);
+    const ads = async () => {
+      const as = await fetch(`https://api.react-learning.ru/products/search?query=${inp}`);
+      console.log(as);
+      const resp = await as.json();
+      console.log(resp);
+    };
+    ads();
   };
 
   return (
@@ -37,26 +45,17 @@ const Header = () => {
       </form>
       <div className={style.heartShopDog}>
         <nav>
+          <NavLink to="/users" className={({ isActive }) => (isActive ? style.active : '')}>
+            <BsFillPersonFill className={style.person} />
+          </NavLink>
           <NavLink to="/favorites" className={({ isActive }) => (isActive ? style.active : '')}>
-            <FontAwesomeIcon
-              icon={faHeart}
-              className={style.heart}
-              onClick={() => console.log('HEART')}
-            />
+            <BsFillChatSquareHeartFill className={style.heart} />
           </NavLink>
           <NavLink to="/sort" className={({ isActive }) => (isActive ? style.active : '')}>
-            <FontAwesomeIcon
-              icon={faBagShopping}
-              className={style.shop}
-              onClick={() => console.log('SORT')}
-            />
+            <FaShoppingBasket className={style.shop} />
           </NavLink>
           <NavLink to="/" className={({ isActive }) => (isActive ? style.active : '')}>
-            <FontAwesomeIcon
-              icon={faDog}
-              className={style.dog}
-              onClick={() => console.log('DOG')}
-            />
+            <SiDatadog className={style.dog} />
           </NavLink>
         </nav>
       </div>

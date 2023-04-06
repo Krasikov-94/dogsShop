@@ -1,43 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { Layout } from './layout';
-import { ErrorPage } from './components/ErrorPage';
-import { Home } from './components/Pages/Home';
-import { Sign } from './components/Pages/Sign';
-import { SignUp } from './components/Pages/Sign/SignUp';
+import { RouterProvider } from 'react-router-dom';
+import { store } from './redux/store';
+import { Provider } from 'react-redux';
+import { router } from './api/Router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: 'home',
-        element: <Home />,
-      },
-      {
-        path: 'products',
-        element: <App />,
-      },
-    ],
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
   },
-  {
-    path: 'signin',
-    element: <Sign />,
-  },
-  {
-    path: 'signup',
-    element: <SignUp />,
-  },
-]);
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );
