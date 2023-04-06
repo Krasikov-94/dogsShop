@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import style from './footer.module.css';
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <div className={style.footer}>
       <div className={style.logo}>
@@ -61,3 +61,5 @@ export const Footer = () => {
     </div>
   );
 };
+
+export const MemoFooter = React.memo(Footer);

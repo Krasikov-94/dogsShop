@@ -1,30 +1,16 @@
-import React, { useState } from 'react';
-import { Footer } from './Footer';
-import { Header } from './Header';
-import { Main } from './Main';
-
-export const FirstContext = React.createContext();
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { MemoFooter } from './Footer';
+import { MemoHeader } from './Header';
 
 export const Layout = () => {
-  const [state, setState] = useState(0);
-
-  const inc = () => {
-    setState((prev) => prev + 1);
-  };
-
-  const exp = {
-    state,
-    setState,
-    inc,
-  };
-  console.log(1);
   return (
     <>
-      <Header />
-      <FirstContext.Provider value={exp}>
-        <Main />
-      </FirstContext.Provider>
-      <Footer />
+      <div>
+        <MemoHeader />
+        <Outlet />
+        <MemoFooter />
+      </div>
     </>
   );
 };

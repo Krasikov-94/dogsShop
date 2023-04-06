@@ -1,9 +1,7 @@
 .App {
-  font-family: 'Open Sans', sans-serif;
-
+  font-family: 'Nunito', Roboto, system-ui, Tahoma, sans-serif;
   text-align: center;
-  /* background-color: black; */
-  height: 100vh;
+  height: 100%;
 }
 * {
   padding: 0;

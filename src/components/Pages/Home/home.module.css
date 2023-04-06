@@ -1,0 +1,23 @@
+.body {
+  height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  font-size: 30px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+.body span {
+  font-size: 42px;
+}
+.btn {
+  background-color: #ff3581;
+  border-radius: 20px;
+  font-size: 30px;
+  padding: 20px;
+  color: white;
+  text-decoration: none;
+}

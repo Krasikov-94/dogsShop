@@ -1,5 +1,6 @@
 .header {
-  /* background-color: #d8ecf6; */
+  /* position: relative; */
+  font-family: 'Nunito', Roboto, system-ui, Tahoma, sans-serif;
   background-color: #6f62a5;
   display: flex;
   justify-content: space-around;
@@ -17,23 +18,30 @@
   margin-right: 10px;
 }
 .heart {
-  height: 30px;
   margin-right: 40px;
+  font-size: 35px;
+  padding-top: 5px;
+  color: white;
 }
 .heart:hover {
   opacity: 0.4;
   cursor: pointer;
 }
 .shop {
-  height: 30px;
   margin-right: 40px;
+  font-size: 35px;
+  padding-top: 5px;
+  color: white;
 }
 .shop:hover {
   opacity: 0.4;
   cursor: pointer;
 }
 .dog {
-  height: 30px;
+  margin-right: 40px;
+  font-size: 35px;
+  padding-top: 5px;
+  color: white;
 }
 .dog:hover {
   opacity: 0.4;
@@ -49,6 +57,15 @@
 }
 .input::placeholder {
   margin-right: 12px;
-  background: url(/src/assets/img/magnifying-glass-solid.svg) no-repeat right;
+  /* background: url(/src/assets/img/magnifying-glass-solid.svg) no-repeat right; */
   opacity: 0.5;
+}
+.active {
+  color: #ffee94;
+}
+.person {
+  margin-right: 40px;
+  font-size: 35px;
+  padding-top: 5px;
+  color: white;
 }

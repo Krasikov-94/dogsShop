@@ -1,24 +1,39 @@
-import React, { useContext } from 'react';
-import { FirstContext } from '../../layout';
+import React from 'react';
 import style from './menu.module.css';
-console.log(1);
-export const Menu = () => {
-  // const j = 'abba';
-  // const s = 'bbc';
 
-  // console.log(
-  //   s
-  //     .split('')
-  //     .filter((char) => j.includes(char))
-  //     .join(''),
-  // );
-
-  const { state, inc } = useContext(FirstContext);
+export const Menu = ({ popularM, minM, maxM, ratM, saleM }) => {
   return (
     <div className={style.body}>
-      <h1>{state}</h1>
-      <h1>Hello Bro use Context</h1>
-      <button onClick={inc}>+</button>
+      <ul className={style.ul}>
+        <li className={style.li}>
+          <button className={style.btn} onClick={popularM}>
+            Популярные
+          </button>
+        </li>
+        <li className={style.li}>
+          <button className={style.btn}>Новинки</button>
+        </li>
+        <li className={style.li}>
+          <button className={style.btn} onClick={minM}>
+            Сначала дешевые
+          </button>
+        </li>
+        <li className={style.li}>
+          <button className={style.btn} onClick={maxM}>
+            Сначала дорогие
+          </button>
+        </li>
+        <li className={style.li}>
+          <button className={style.btn} onClick={ratM}>
+            По рейтингу
+          </button>
+        </li>
+        <li className={style.li}>
+          <button className={style.btn} onClick={saleM}>
+            По скидке
+          </button>
+        </li>
+      </ul>
     </div>
   );
 };
