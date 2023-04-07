@@ -17,10 +17,14 @@ export const CardItem = ({ prod }) => {
   const rat = Math.round(ratSum / ratLength);
   prod.avgRating = rat ? rat : 0;
 
+  const currentProduct = (event) => {
+    console.log(event.currentTarget);
+  };
+
   //карточка товара
   return (
     <>
-      <div className={style.product_card}>
+      <div className={style.product_card} onClick={(event) => currentProduct(event)}>
         {prod.discount > 0 && <div className={style.badge}>{prod.discount}%</div>}
         <div className={style.product_tumb}>
           <img src={prod.pictures} alt="" />

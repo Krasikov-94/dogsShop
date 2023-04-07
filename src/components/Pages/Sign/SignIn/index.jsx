@@ -2,10 +2,8 @@
 import { useMutation } from '@tanstack/react-query';
 import { Field, Form, Formik } from 'formik';
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
-import { setUsers } from '../../../../redux/slices/userSlice';
 import { TOKEN } from '../../../../utils/constants';
 import style from './signin.module.css';
 
@@ -18,7 +16,6 @@ const signSchema = Yup.object().shape({
 
 export const SignIn = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem(TOKEN);
@@ -54,7 +51,7 @@ export const SignIn = () => {
         body: JSON.stringify(user),
       });
       const response = await res.json();
-      dispatch(setUsers(response.data));
+
       localStorage.setItem(TOKEN, response.token);
       return response.data;
     },

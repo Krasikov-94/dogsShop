@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import style from './modal.module.css';
+import { ModalCard } from './ModalCard';
 
 const ModalContent = ({ children, closeModal }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     const listner = (event) => {
       if (event.key === 'Escape') closeModal();
@@ -34,7 +37,7 @@ export const Modal = ({ isOpen = false, closeModal, children }) => {
 
   return createPortal(
     <div onClick={handleExit} className={style.modal_wrapper}>
-      <ModalContent closeModal={closeModal}>{children}</ModalContent>
+      <ModalCard closeModal={closeModal}>{children}</ModalCard>
     </div>,
     document.getElementById('modal'),
   );

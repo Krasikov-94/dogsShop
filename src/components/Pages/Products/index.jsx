@@ -83,7 +83,7 @@ export const Products = () => {
   // });
 
   const { prod, isError, error, isLoading } = useProducts();
-  console.log(prod, isError, error, isLoading);
+  console.log(prod);
 
   const { mutateAsync: saleM } = useMutation({
     mutationFn: saleSort,
