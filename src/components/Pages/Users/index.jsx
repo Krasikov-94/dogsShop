@@ -1,14 +1,12 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
 import React, { useEffect } from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useSignInUser } from '../../../hooks/useSignInUser';
 import { TOKEN } from '../../../utils/constants';
 import styles from './users.module.css';
 
 export const Users = () => {
-  // const users = useSelector((state) => state.userReducer);
-  // console.log(users);
+  const user = useSelector((state) => state.userReducer);
+  console.log(user);
 
   const navigate = useNavigate();
 
@@ -22,14 +20,11 @@ export const Users = () => {
     navigate('/signin');
   };
 
-  const mutation = useMutation(['users']);
-  console.log(mutation);
-
   return (
     <>
       <div className={styles.wrapper}>
         <p className={styles.p}>Личный кабинет</p>
-        {/* <div className={styles.content}>
+        <div className={styles.content}>
           <div className={styles.body}>
             <h1>{user.about}</h1>
             <button className={styles.btn}>Редактировать</button>
@@ -44,7 +39,7 @@ export const Users = () => {
             <img className={styles.img} src={user.avatar} alt="dasd" />
             <button className={styles.btn}>Редактировать</button>
           </div>
-        </div> */}
+        </div>
         <button className={styles.exit} onClick={exitBtn}>
           Выйти
         </button>

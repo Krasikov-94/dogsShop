@@ -11,7 +11,7 @@ const initialState = {
 };
 
 export const userSlice = createSlice({
-  name: 'users',
+  name: 'user',
   initialState,
   reducers: {
     setUsers(state, action) {
@@ -21,8 +21,7 @@ export const userSlice = createSlice({
       state.name = action.payload.name;
       state.__v = action.payload.__v;
       state._id = action.payload._id;
-
-      // console.log(action);
+      console.log(action);
     },
   },
 });

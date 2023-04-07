@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { TOKEN } from '../utils/constants';
 
 export const signInFetch = async (values) => {
-  console.log(values);
   const res = await fetch('https://api.react-learning.ru/signin', {
     method: 'POST',
     headers: {
