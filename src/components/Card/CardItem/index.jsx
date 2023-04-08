@@ -2,8 +2,10 @@
 import style from './carditem.module.css';
 import { FaStar } from 'react-icons/fa';
 import { AiOutlineStar } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 export const CardItem = ({ prod }) => {
+  const navigate = useNavigate();
   //цена с учетом скидки
   const totalPrice = prod.discount ? prod.price - (prod.price * prod.discount) / 100 : prod.price;
 
@@ -17,10 +19,17 @@ export const CardItem = ({ prod }) => {
   const rat = Math.round(ratSum / ratLength);
   prod.avgRating = rat ? rat : 0;
 
+  const currentProduct = () => {
+    const id = prod._id;
+    console.log(id);
+
+    navigate(`/products/${prod._id}`);
+  };
+
   //карточка товара
   return (
     <>
-      <div className={style.product_card}>
+      <div className={style.product_card} onClick={() => currentProduct()}>
         {prod.discount > 0 && <div className={style.badge}>{prod.discount}%</div>}
         <div className={style.product_tumb}>
           <img src={prod.pictures} alt="" />

@@ -7,3 +7,4 @@ export const signInFetch = (values) => {
     body: JSON.stringify(values),
   });
 };
+export const userApi = 'https://api.react-learning.ru/v2/group-11/users/me';

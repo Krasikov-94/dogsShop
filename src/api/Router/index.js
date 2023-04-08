@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from '../../components/ErrorPage';
+import { CurrentProd } from '../../components/Pages/CurrentProduct';
 import { Home } from '../../components/Pages/Home';
 import { Products } from '../../components/Pages/Products';
 import { SignIn } from '../../components/Pages/Sign/SignIn';
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: 'products',
         element: <Products />,
+      },
+      {
+        path: 'products/:currentProd',
+        element: <CurrentProd />,
       },
       {
         path: 'users',
