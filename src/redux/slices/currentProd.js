@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import userSlice from './userSlice';
 
 const initialState = {
   about: '',
@@ -10,11 +11,11 @@ const initialState = {
   _id: '',
 };
 
-export const userSlice = createSlice({
-  name: 'user',
+export const cardSlice = createSlice({
+  name: 'card',
   initialState,
   reducers: {
-    setUsers(state, action) {
+    setId(state, action) {
       // state = { ...action.payload };
       state.email = action.payload.email;
       state.about = action.payload.about;
@@ -28,6 +29,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setUsers } = userSlice.actions;
+export const { setId } = cardSlice.actions;
 
-export default userSlice.reducer;
+export default cardSlice.reducer;

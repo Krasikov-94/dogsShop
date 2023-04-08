@@ -60,7 +60,7 @@ export const Users = () => {
             </div>
           </div>
         ) : (
-          <p>Ваши данные не пришли......</p>
+          <p>Ваши данные загружаются......</p>
         )}
         <button className={styles.exit} onClick={exitBtn}>
           Выйти
