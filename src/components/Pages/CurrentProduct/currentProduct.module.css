@@ -35,3 +35,11 @@
 .right {
   margin-left: 40px;
 }
+.btn {
+  width: 100px;
+  padding: 10px;
+  margin: 20px;
+  background-color: greenyellow;
+  color: black;
+  border-radius: 15px;
+}

@@ -1,15 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TOKEN } from '../../../utils/constants';
 import styles from './users.module.css';
 import axios from 'axios';
 import { userApi } from '../../../api/user';
+import { useDispatch } from 'react-redux';
+import { getToken } from '../../../redux/slices/tokenSlice';
 
 export const Users = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const token = localStorage.getItem(TOKEN);
+
+  console.log(token);
+
   useEffect(() => {
     if (!token) navigate('/signin');
   }, [navigate, token]);
@@ -23,7 +29,7 @@ export const Users = () => {
             Authorization: 'Bearer ' + token,
           },
         });
-        console.log(response.data);
+        console.log(response.token);
         return response.data;
       } catch (error) {
         console.error(error);
@@ -35,8 +41,6 @@ export const Users = () => {
     localStorage.clear();
     navigate('/signin');
   };
-
-  console.log(users);
 
   return (
     <>

@@ -7,7 +7,8 @@ import { SignIn } from '../../components/Pages/Sign/SignIn';
 import { SignUp } from '../../components/Pages/Sign/SignUp';
 import { Users } from '../../components/Pages/Users';
 import { Layout } from '../../layout';
-
+import { Basket } from '../../components/Pages/Basket';
+import { Favorites } from '../../components/Pages/Favorites';
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -32,7 +33,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'basket',
-        element: <Users />,
+        element: <Basket />,
+      },
+      {
+        path: 'favorites',
+        element: <Favorites />,
       },
     ],
   },

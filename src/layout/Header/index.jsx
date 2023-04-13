@@ -51,10 +51,10 @@ const Header = () => {
           <NavLink to="/favorites" className={({ isActive }) => (isActive ? style.active : '')}>
             <BsFillChatSquareHeartFill className={style.heart} />
           </NavLink>
-          <NavLink to="/sort" className={({ isActive }) => (isActive ? style.active : '')}>
+          <NavLink to="/basket" className={({ isActive }) => (isActive ? style.active : '')}>
             <FaShoppingBasket className={style.shop} />
           </NavLink>
-          <NavLink to="/" className={({ isActive }) => (isActive ? style.active : '')}>
+          <NavLink to="/home" className={({ isActive }) => (isActive ? style.active : '')}>
             <SiDatadog className={style.dog} />
           </NavLink>
         </nav>

@@ -5,34 +5,48 @@ import React from 'react';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { setUsers } from '../../../../redux/slices/userSlice';
+import { useMutation } from '@tanstack/react-query';
+import { TOKEN } from '../../../../utils/constants';
+import { useNavigate } from 'react-router-dom';
 
 const signupSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string()
     .min(8, 'Минимальная длина пароля 8 символов')
     .required('Пароль является обязательным'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Пароли не совпадают')
-    .min(8, 'Минимальная длина пароля 8 символов')
-    .required('Пароль является обязательным'),
 });
 
 export const SignUp = () => {
-  // const users = useSelector((state) => state.userReducer);
+  const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  // const navigate = useNavigate();
-
-  const onSubmit = (values) => {
-    // console.log(values);
-    dispatch(setUsers(values));
+  const onSubmit = async (values) => {
+    const res = await mutateAsync(values);
   };
 
   const initialValues = {
     email: '',
     password: '',
-    confirmPassword: '',
+    group: 'group-11',
   };
+
+  const { mutateAsync, isError, isLoading, error } = useMutation({
+    mutationKey: 'users',
+    mutationFn: async (user) => {
+      const res = await fetch('https://api.react-learning.ru/signup', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      });
+      const response = await res.json();
+      localStorage.setItem(TOKEN, response.token);
+      return response.data;
+    },
+    onSuccess: () => {
+      navigate('/users');
+    },
+  });
 
   return (
     <div className={styles.body}>
@@ -51,15 +65,6 @@ export const SignUp = () => {
             className={styles.inp}
           />
           <ErrorMessage name="password" />
-
-          <Field
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="confirmPassword"
-            type="password"
-            className={styles.inp}
-          />
-          <ErrorMessage name="confirmPassword" />
           <button type="submit">Зарегистрировать</button>
         </Form>
       </Formik>

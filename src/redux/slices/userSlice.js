@@ -1,28 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  about: '',
-  avatar: 'https://react-learning.ru/image-compressed/default-image.jpg',
-  email: '',
-  group: 'group-11',
-  name: '',
-  __v: 0,
-  _id: '',
-};
+import { myInitialState } from '../initialState';
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState: myInitialState.user,
   reducers: {
     setUsers(state, action) {
-      // state = { ...action.payload };
-      state.email = action.payload.email;
-      state.about = action.payload.about;
-      state.avatar = action.payload.avatar;
-      state.name = action.payload.name;
-      state.__v = action.payload.__v;
-      state._id = action.payload._id;
-      // console.log(action);
+      // state = state.unshift(action.payload);
+      // console.log(state);
+      state = { ...action.payload };
     },
   },
 });
@@ -30,4 +16,4 @@ export const userSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { setUsers } = userSlice.actions;
 
-export default userSlice.reducer;
+export const userReducer = userSlice.reducer;

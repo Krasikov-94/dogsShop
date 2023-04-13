@@ -2,8 +2,10 @@
 import { useMutation } from '@tanstack/react-query';
 import { Field, Form, Formik } from 'formik';
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { getToken } from '../../../../redux/slices/tokenSlice';
 import { TOKEN } from '../../../../utils/constants';
 import style from './signin.module.css';
 
@@ -16,6 +18,7 @@ const signSchema = Yup.object().shape({
 
 export const SignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem(TOKEN);
@@ -40,7 +43,7 @@ export const SignIn = () => {
   //   console.log(response.data);
   //   return response;
   // };
-  const { mutateAsync, isError, isLoading, error } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationKey: 'users',
     mutationFn: async (user) => {
       const res = await fetch('https://api.react-learning.ru/signin', {
@@ -51,15 +54,13 @@ export const SignIn = () => {
         body: JSON.stringify(user),
       });
       const response = await res.json();
-
       localStorage.setItem(TOKEN, response.token);
-      return response.data;
+      return response;
     },
     onSuccess: () => {
       navigate('/users');
     },
   });
-
   // const onSubmit = async (values) => {
   //   const res = await signInFetch(values);
   //   if (res.ok) {

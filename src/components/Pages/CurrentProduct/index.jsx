@@ -50,6 +50,7 @@ export const CurrentProd = () => {
                 </div>
                 <div className={style.right}>
                   <img className={style.img} src={oneProd.pictures} alt={oneProd.name} />
+                  <button className={style.btn}>Купить</button>
                 </div>
               </div>
             </div>

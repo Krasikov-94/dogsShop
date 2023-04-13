@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { TOKEN } from '../../../utils/constants';
 import styles from './home.module.css';
 
 export const Home = () => {
+  const token = localStorage.getItem(TOKEN);
+
   return (
     <>
       <div className={styles.body}>
@@ -24,9 +27,16 @@ export const Home = () => {
           </p>
         </div>
         <div className={styles.bnt_col}>
-          <Link className={styles.btn} to="/signin">
+          {token ? (
+            ''
+          ) : (
+            <Link className={styles.btn} to="/signin">
+              Войти
+            </Link>
+          )}
+          {/* <Link className={styles.btn} to="/signin">
             Войти
-          </Link>
+          </Link> */}
         </div>
       </div>
     </>
